@@ -3,7 +3,7 @@ section .bss
 
 section .rodata
     path_name db '/bin/bash', 0; terminate string \0
-    msg_failed db 'Connection refused', 10; new line \n
+    msg_failed db 'Connection refused', 10, 0; new line \n\0
     len equ $
 
     struc socket_; define structure
