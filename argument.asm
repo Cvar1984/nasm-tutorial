@@ -18,8 +18,8 @@ sloop:
     inc rax
     jmp strlen
 _start:
-    pop r8
-    pop rsi
+    pop r8; get argc
+    pop rsi; we dont need argv[0]
     dec r8
     jz  exit
 check_args:
