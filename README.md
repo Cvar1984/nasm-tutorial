@@ -4,7 +4,7 @@
 
 basic knowelde of assembly
 # references
-[Linux syscall tables](https://chromium.googlesource.com/chromiumos/docs/+/master/constants/syscalls.md)
+[Linux syscall tables](https://chromium.googlesource.com/chromiumos/docs/+/HEAD/constants/syscalls.md)
 
 [NASM official docs](https://nasm.us/docs.php)
 
