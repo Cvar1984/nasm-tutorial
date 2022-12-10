@@ -2,9 +2,11 @@
 ![](https://img.shields.io/badge/haxor-approved%20by%20nasa-blue)
 ![](https://img.shields.io/badge/language-god-white)
 
-basic knowelde of assembly
+
 # references
 [Linux syscall tables](https://chromium.googlesource.com/chromiumos/docs/+/HEAD/constants/syscalls.md)
+
+[Flags](https://en.wikipedia.org/wiki/FLAGS_register)
 
 [NASM official docs](https://nasm.us/docs.php)
 
