@@ -23,7 +23,7 @@ _start:
     dec r8
     jz  exit
 check_args:
-    xor rax, rax
+    xor rax, rax; clean rax before used
     mov qword rdi, [rsp]; uint64_t arg1
     call strlen
 write:
