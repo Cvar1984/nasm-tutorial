@@ -12,13 +12,23 @@
 
 [NASM tutorial](https://cs.lmu.edu/~ray/notes/nasmtutorial/)
 
-# compile
+## compile
 ```sh
 nasm -f elf64 hello.asm -o hello.o
-````
+```
 ```sh
 ld hello.o -o hello
-````
+```
 ```sh
 ./hello
+```
+## compile C and assembly with gcc
+```sh
+nasm -f elf64 hello.asm -o hello.o
+```
+```sh
+gcc -no-pie -nostdlib say.c -c
+```
+```sh
+ld say.o hello.o -o say
 ```
