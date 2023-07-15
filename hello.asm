@@ -1,5 +1,5 @@
 section .rodata
-    msg db 'Ramdhan Firmansyah', 0xa
+    msg db 'Bellatrix Lugosi', 0xa
     len equ $-msg
     
     ;sys call list
@@ -15,9 +15,10 @@ section .rodata
      stdout equ 1
 
 section .text
+    global _say
     global _start
 
-_start:
+_say:
     mov edx, len ; msg length
     mov ecx, msg
     mov ebx, stdout; 1
@@ -26,3 +27,5 @@ _start:
 
     mov eax, sys_exit; 1
     int 0x80; kernel call
+_start:
+call _say
