@@ -32,3 +32,8 @@ gcc -no-pie -nostdlib say.c -c
 ```sh
 ld say.o hello.o -o say
 ```
+
+## clean mess
+```sh
+git clean -xdfn
+```
