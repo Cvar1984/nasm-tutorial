@@ -46,3 +46,8 @@ _start:
 ;         esi         ; -4
 ;         edi         ; -8
 ;         ebx         ; -12 <-esp
+
+; Great you understand how stack flow works now watch this
+; https://www.youtube.com/watch?v=T03idxny9jE
+; https://www.youtube.com/watch?v=8QzOC8HfOqU
+; https://www.youtube.com/watch?v=HSlhY4Uy8SA
