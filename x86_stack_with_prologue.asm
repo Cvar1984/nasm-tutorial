@@ -4,11 +4,17 @@ global _start
 _add:
     push ebp ; save ebp to the stack
     mov ebp, esp ; move ebp to whatever esp located at
+    push esi
+    push edi
+    push ebx
     
     ; skip return address of _call on [ebp+4]
-    mov eax, [ebp+8] ; 32bit/8 = 4bytes + 4bytes = 8bytes 
-    add eax, [ebp+12] ; 8+4 = 12
-    mov esp, ebp ; cleanup stack by moving esp to ebp
+    mov eax, [ebp+8] ;  = 3
+    add eax, [ebp+12] ; = 2
+    pop ebx
+    pop edi
+    pop esi
+    mov esp, ebp ; cleanup stack by moving esp to ebp (unecessary for this case cuz esp already at ebp)
     pop ebp ; return old ebp
     ret ; return eax sum
 
@@ -28,10 +34,13 @@ _start:
 ; Memory growing from top to bottom.
 ; number below is relative to ebp position.
 ; ebp is used as fixed reference.
+; 32bit/8 = 4 bytes per memory column.
 
 ;____Stack Memory____;
 ;          2        ; +12
 ;          3        ; +8
 ;  ret addr of add  ; +4
 ;      old ebp      ;  0  <-ebp
-;    empty space    ; -4  <-esp (esp could be pointing to empty space)
+;         esi       ; -4
+;         edi       ; -8
+;         ebx       ; -12 <-esp
