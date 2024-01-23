@@ -25,7 +25,7 @@ _exit:
 _start:
     push 2 ; push value to the stack
     push 3
-    call _add ; return address pushed to the stack
+    call _add ; save current eip to the stack
 
     mov ebx, eax ; set arg1 for exit to the return value of _add
     jmp _exit
@@ -35,12 +35,14 @@ _start:
 ; number below is relative to ebp position.
 ; ebp is used as fixed reference.
 ; 32bit/8 = 4 bytes per memory column.
+; call: pushes return address and modifies eip.
+; jump: modifies eip directly.
 
-;____Stack Memory____;
-;          2        ; +12
-;          3        ; +8
-;  ret addr of add  ; +4
-;      old ebp      ;  0  <-ebp
-;         esi       ; -4
-;         edi       ; -8
-;         ebx       ; -12 <-esp
+;_____Stack Memory____;
+;          2          ; +12
+;          3          ; +8
+; saved eip from _add ; +4
+;      old ebp        ;  0  <-ebp
+;         esi         ; -4
+;         edi         ; -8
+;         ebx         ; -12 <-esp
