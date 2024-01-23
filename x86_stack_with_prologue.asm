@@ -8,7 +8,7 @@ _add:
     ; skip return address of _call on [ebp+4]
     mov eax, [ebp+8] ; 32bit/8 = 4bytes + 4bytes = 8bytes 
     add eax, [ebp+12] ; 8+4 = 12
-    mov esp, ebp ; cleanup stack
+    mov esp, ebp ; cleanup stack by moving esp to ebp
     pop ebp ; return old ebp
     ret ; return eax sum
 
@@ -25,8 +25,9 @@ _start:
     jmp _exit
 
 
-; Memory growing from top to bottom
-; number relative to ebp position
+; Memory growing from top to bottom.
+; number below is relative to ebp position.
+; ebp is used as fixed reference.
 
 ;____Stack Memory____;
 ;          2        ; +12
