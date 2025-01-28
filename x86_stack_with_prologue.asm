@@ -43,9 +43,9 @@ _start:
 ;      +24        2             +12
 ;      +20        3             +8
 ;      +16 saved eip from _add  +4
-;      -12      old ebp          0  <-ebp
-;      -8         esi           -4
-;      -4         edi           -8
+;      +12      old ebp          0  <-ebp
+;      +8         esi           -4
+;      +4         edi           -8
 ;esp->  0         ebx           -12 
 
 ; Great you understand how stack flow works now watch this
