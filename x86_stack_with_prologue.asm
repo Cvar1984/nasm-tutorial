@@ -32,20 +32,21 @@ _start:
 
 
 ; Memory growing from top to bottom.
-; number below is relative to ebp position.
+; number the right is relative to ebp position.
+; number on the left relative to esp position
 ; ebp is used as fixed reference.
 ; 32bit/8 = 4 bytes per memory column.
 ; call: pushes return address and modifies eip.
 ; jump: modifies eip directly.
 
-;_____Stack Memory____;
-;          2          ; +12
-;          3          ; +8
-; saved eip from _add ; +4
-;      old ebp        ;  0  <-ebp
-;         esi         ; -4
-;         edi         ; -8
-;         ebx         ; -12 <-esp
+;         _____Stack Memory____
+;      +24        2             +12
+;      +20        3             +8
+;      +16 saved eip from _add  +4
+;      -12      old ebp          0  <-ebp
+;      -8         esi           -4
+;      -4         edi           -8
+;esp->  0         ebx           -12 
 
 ; Great you understand how stack flow works now watch this
 ; https://www.youtube.com/watch?v=T03idxny9jE
