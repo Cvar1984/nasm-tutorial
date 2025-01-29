@@ -8,15 +8,15 @@ _add:
     push edi
     push ebx
     
-    ; skip return address of _call on [ebp+4]
-    mov eax, [ebp+8] ;  = 3
-    add eax, [ebp+12] ; = 2
+    ; skip return address of _add on [ebp+4]
+    mov eax, [ebp+8] ;  = 3 or [esp+20] 
+    add eax, [ebp+12] ; = 2 or [esp+24]
     pop ebx
     pop edi
     pop esi
     mov esp, ebp ; cleanup stack by moving esp to ebp (unecessary for this case cuz esp already at ebp)
     pop ebp ; return old ebp
-    ret ; return eax sum
+    ret ; return eip on the stack
 
 _exit:
     mov eax, 1 ; syscall for exit
@@ -25,19 +25,18 @@ _exit:
 _start:
     push 2 ; push value to the stack
     push 3
-    call _add ; save current eip to the stack
-
-    mov ebx, eax ; set arg1 for exit to the return value of _add
+    call _add ; save current instruction pointer on the stack (push eip)
+    mov ebx, eax ; set arg1 for exit to the value of eax we get from _add
     jmp _exit
 
 
 ; Memory growing from top to bottom.
-; number the right is relative to ebp position.
+; number on the right relative to ebp position.
 ; number on the left relative to esp position
-; ebp is used as fixed reference.
+; ebp is used as fixed reference while esp used as relative refrence
 ; 32bit/8 = 4 bytes per memory column.
 ; call: pushes return address and modifies eip.
-; jump: modifies eip directly.
+; jump: modifies eip directly
 
 ;         _____Stack Memory____
 ;      +24        2             +12
