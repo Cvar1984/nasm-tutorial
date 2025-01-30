@@ -17,8 +17,8 @@ _print:
 _printCounter:
     inc rax
     inc rbx
-    mov rcx, [rax]
-    cmp rcx, 0
+    mov cl, byte [rax]; rcx 64bit(8byte), ecx 32bit(4byte), cx 16bit(2byte), cl 8bit(1byte)
+    cmp cl, 0
     jne _printCounter; loop
 
 _printWrite:
@@ -33,3 +33,4 @@ _exit:
     mov rax, 60
     mov rdi, 0
     syscall
+;registers size https://wiki.osdev.org/CPU_Registers_x86-64
