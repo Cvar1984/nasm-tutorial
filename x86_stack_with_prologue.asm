@@ -34,7 +34,9 @@ _start:
 ; number on the right relative to ebp position.
 ; number on the left relative to esp position
 ; ebp is used as fixed reference while esp used as relative refrence
-; 32bit/8 = 4 bytes per memory column.
+; 1 bit = 2^1
+; 1 byte = 8 bit
+; 32 bit / 8 = 4 bytes per column or 2^(4*8) = 4,294,967,296 max number per column
 ; call: pushes return address and modifies eip.
 ; jump: modifies eip directly
 
