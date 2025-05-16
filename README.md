@@ -12,6 +12,10 @@
 
 [NASM tutorial](https://cs.lmu.edu/~ray/notes/nasmtutorial/)
 
+# REcommended tools for practice
+- [pwndbg](https://github.com/pwndbg/pwndbg/)
+![image](https://github.com/user-attachments/assets/99657225-cddf-4af0-8e03-10cd7ecc3c6a)
+
 ## compile
 ```sh
 nasm -f elf64 hello.asm -o hello.o
