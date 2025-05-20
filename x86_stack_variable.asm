@@ -7,7 +7,7 @@ multiply:; multiply ebx(arg0), ecx(arg1)
     mov ebp, esp
 
     sub esp, 8; reserve 2 columns of memory on the stack
-
+    ; push are preferred but you could also store value to stack like this, using ebp is a good idea but you on your own
     mov dword [esp+4], ebx; store arg0 to stack
     mov dword [esp], ecx; store arg1 to stack
 
